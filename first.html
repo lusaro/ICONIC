@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="second.css">
+  <title>Fullscreen Image</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    .fullscreen-img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <img src="./imgs/car.png" alt="Fullscreen Image" class="fullscreen-img">
+  <button class="reset-rabatt-button" style="z-index: 99;">Reset Rabatt</button>
+  <div class="glass-box">
+    <div class="product-info">
+      <h2 class="product-title">Bonsei Baum</h2>
+      <span class="product-price">19,99€</span>
+      <span class="original-price">50€</span>
+      <p class="product-description">Irgendeine lange beschreibung oder so...</p>
+    </div>
+    <div class="product-container">
+      <img src="./imgs/Bonsai.webp" alt="Product Image" class="product-img">
+    </div>
+    <div class="extra-rabatt">Extra Rabatt: <span id="rabatt-prozent">0%</span></div>
+    
+    <button class="kaufen-button" style="z-index: 10;">Kaufen</button>
+    <a href="landing.html">
+      <button class="zurueck-button">Zurück</button>
+    </a>
+  </div>
+
+  
+  <script src="first.js"></script>
+</body>
+</html>

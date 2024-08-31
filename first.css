@@ -1,0 +1,334 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #212121; /* Dark gray background */
+  background-image: linear-gradient(to bottom, #212121, #333333); /* Gradient effect to enhance depth */
+}
+
+
+/* Stil der gläsernen Box */
+.glass-box {
+  position: absolute;
+  top: 100vh; /* Startposition komplett unten außerhalb des Bildschirms */
+  left: 50%;
+  width: 80%; /* Reduced width to create more negative space */
+  height: 80%; /* Reduced height to create more negative space */
+  padding: 20px;
+  background: rgba(136, 136, 136, 0.3); /* Reduced opacity to minimize foggy effect */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* Reduced blur radius to minimize foggy effect */
+  opacity: 0;
+  transition: top 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.5s;
+  animation: glass-box-animation 1.5s forwards;
+  z-index: 2;
+}
+
+@keyframes glass-box-animation {
+  0% {
+    top: 100vh;
+  }
+  100% {
+    top: 50vh;
+  }
+}
+
+
+.show-box {
+  top: 50vh;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 0.8; /* Increased opacity to enhance visibility */
+  /* Move the background position to create the darkening effect */
+  z-index: 3;
+}
+
+/* Add some extra styles to give it a more glassy look */
+.glass-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3); /* Reduced opacity to minimize foggy effect */
+  opacity: 0.5;
+  border-radius: 10px;
+  z-index: 3;
+}
+
+.glass-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3); /* Reduced opacity to minimize foggy effect */
+  opacity: 0.5;
+  border-radius: 10px;
+  transform: rotate(180deg);
+  z-index: 3;
+}
+
+.glass-box:hover {
+  background: #FFFFFF;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(0px); /* Remove blur effect */
+  transition: background-color 1.5s;
+}
+
+
+.glass-box:hover::before {
+  background: #FFFFFF; /* White background */
+  opacity: 1;
+}
+
+.glass-box:hover::after {
+  background: #FFFFFF; /* White background */
+  opacity: 1;
+}
+
+.glass-box:hover .product-title {
+  color: #000000;
+}
+
+
+/* Content /*
+
+/* Product info styles */
+.product-info {
+    position: absolute;
+    top: 40%; /* Adjusted top position to move it up a bit */
+    left: 50%;
+    right: 10%;
+    transform: translateX(60%) translateY(-120%);
+    text-align: left;
+    transition: all 0.8s ease-in-out;
+    z-index: 4;
+  }
+  
+  .show-box .product-info {
+    transform: translateX(0) translateY(-120%);
+    z-index: 4;
+  }
+
+  .product-title {
+    font-size: 54px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #FFFFFF; /* Pure white color */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow to enhance visibility */
+    mix-blend-mode: screen; /* Ensure the text color is not affected by the background */
+    z-index: 5;
+  }
+  
+  .product-price {
+    font-size: 30px;
+    font-weight: bold;
+    color: #04ff00; /* Bright green color to make it stand out */
+    text-shadow: 0 0 40px rgb(0, 0, 0);
+    margin-bottom: 20px;
+    padding: 5px 10px; /* Add some padding to create a sense of depth */
+    border-radius: 5px; /* Add a subtle border radius to soften the edges */
+    background-color: rgba(0, 0, 0, 0.1); /* Add a faint background color to create contrast */
+    padding-right: 50%;
+    position: relative;
+    z-index: 4;
+  }
+
+  .original-price {
+    text-decoration: line-through;
+    color: #FF0000;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 50%;
+    position: absolute;
+    margin-top: 2.5%;
+    right: 25%;
+    padding: 5px 10px; /* Add some padding to match the product price padding */
+    z-index: 5;
+    opacity: 0;
+  }
+
+  .glass-box:hover .original-price {
+    text-decoration: line-through;
+    color: #900000;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 50%;
+    position: absolute;
+    top: 50%;
+    right: 25%;
+    padding: 5px 10px; /* Add some padding to match the product price padding */
+    z-index: 5;
+    opacity: 1;
+  }
+
+  .glass-box:hover .product-price {
+    background-color: #000000;
+    box-shadow: 0 0 25px rgb(0, 0, 0);
+  }
+
+  .original-price:hover::after {
+    content: "Nur für BEGRENZTE Zeit";
+    color: #FF0000;
+    text-shadow: 0 0 15px rgb(255, 0, 0);
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 7px;
+    right: -220px; /* adjust the right value to position the text correctly */
+    z-index: 6;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .original-price:hover::after {
+    opacity: 1;
+  }
+  
+  .product-description {
+    font-size: 25px;
+    color: #000000;
+    z-index: 4;
+  }
+
+  .product-container {
+    position: absolute;
+    top: 50%;
+    left: -100%;
+    transform: translate(-50%, -50%);
+    animation: slide-in 1.5s forwards;
+    z-index: 5;
+  }
+  
+  .product-img {
+    transform: scale(1);
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 6;
+  }
+  
+  @keyframes slide-in {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 25%;
+    }
+  }
+
+  .kaufen-button {
+    position: absolute;
+    bottom: 20px;
+    left: 60%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 50px;
+    background-color: #04ff00;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    opacity: 1;
+    z-index: 5;
+    animation: delay-box-shadow 2.5s forwards;
+    animation-delay: 3s;
+  }
+  
+  @keyframes delay-box-shadow {
+    0% {
+      box-shadow: none;
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+    }
+    100% {
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .kaufen-button:hover {
+    background-color: #00ff00;
+    z-index: 4;
+    animation: delay-box-shadow2 0.2s forwards;
+    z-index: 5;
+  }
+
+  @keyframes delay-box-shadow2 {
+    0% {
+      box-shadow: none;
+    }
+    100% {
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+    }
+  }
+  
+  .glass-box:hover .kaufen-button {
+    background-color: #00ff00;
+    color: white;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+    z-index: 4;
+  }
+
+  .zurueck-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    transform: translateX(0);
+    width: 100px;
+    height: 30px;
+    background-color: #ff0000;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    opacity: 0.5;
+    z-index: 5;
+    animation: delay-box-shadow 2.5s forwards;
+    animation-delay: 3s;
+  }
+  
+  .zurueck-button:hover {
+    background-color: #ff0000;
+    z-index: 4;
+    opacity: 0.5;
+    animation: delay-box-shadow2 0.2s ease-in;
+  }
+  
+  .glass-box:hover .zurueck-button {
+    background-color: #ff0000;
+    color: white;
+    opacity: 0.5;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+    z-index: 4;
+  }
+
+
+  .extra-rabatt {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+  }
+
+  .glass-box:hover .extra-rabatt {
+    color: #000000;
+  }
